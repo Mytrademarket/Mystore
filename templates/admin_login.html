@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            /* Rainbow animated gradient background */
+            background: linear-gradient(135deg, #ff4d4d, #ffb84d, #ffff4d, #4dff4d, #4dffff, #4d4dff, #b84dff);
+            background-size: 1400% 1400%;
+            animation: gradientAnimation 15s ease infinite;
+            min-height: 100vh;
+            display: flex;
+            align-items: flex-start; /* Align top */
+            justify-content: center;
+            padding-top: 80px; /* Move card down slightly from top */
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        @keyframes gradientAnimation {
+            0% {background-position: 0% 50%;}
+            50% {background-position: 100% 50%;}
+            100% {background-position: 0% 50%;}
+        }
+
+        .login-card {
+            width: 100%;
+            max-width: 400px;
+            padding: 30px 25px;
+            border-radius: 15px;
+            box-shadow: 0 12px 30px rgba(0,0,0,0.2);
+            background-color: rgba(255, 255, 255, 0.95);
+            border: 4px solid;
+            border-radius: 20px;
+            border-image-slice: 1;
+            border-image-source: linear-gradient(45deg, #ff4d4d, #ffb84d, #ffff4d, #4dff4d, #4dffff, #4d4dff, #b84dff);
+            animation: borderShift 5s linear infinite;
+        }
+
+        @keyframes borderShift {
+            0% {border-image-source: linear-gradient(45deg, #ff4d4d, #ffb84d, #ffff4d, #4dff4d, #4dffff, #4d4dff, #b84dff);}
+            50% {border-image-source: linear-gradient(45deg, #b84dff, #4d4dff, #4dffff, #4dff4d, #ffff4d, #ffb84d, #ff4d4d);}
+            100% {border-image-source: linear-gradient(45deg, #ff4d4d, #ffb84d, #ffff4d, #4dff4d, #4dffff, #4d4dff, #b84dff);}
+        }
+
+        .login-card h2 {
+            margin-bottom: 25px;
+            text-align: center;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .login-logo {
+            display: block;
+            margin: 0 auto 20px auto;
+            max-width: 100px;
+        }
+
+        .forgot-link {
+            font-size: 0.9rem;
+            text-align: right;
+            display: block;
+            margin-top: 5px;
+        }
+
+        .btn-rainbow {
+            background: linear-gradient(45deg, #ff4d4d, #ffb84d, #ffff4d, #4dff4d, #4dffff, #4d4dff, #b84dff);
+            color: white;
+            font-weight: 600;
+            border: none;
+            transition: all 0.3s ease;
+            background-size: 400% 400%;
+            animation: buttonGradient 8s ease infinite;
+        }
+
+        .btn-rainbow:hover {
+            filter: brightness(1.1);
+            transform: scale(1.03);
+        }
+
+        @keyframes buttonGradient {
+            0% {background-position: 0% 50%;}
+            50% {background-position: 100% 50%;}
+            100% {background-position: 0% 50%;}
+        }
+    </style>
+</head>
+<body>
+
+<div class="login-card">
+    <!-- Optional logo -->
+    <img src="static/uploads/default_logo.png" alt="Logo" class="login-logo">
+
+    <h2>Admin Login</h2>
+    <form method="POST">
+        <div class="mb-3">
+            <label for="username" class="form-label">Username</label>
+            <input type="text" id="username" name="username" placeholder="Enter username" class="form-control" required>
+        </div>
+        <div class="mb-3">
+            <label for="password" class="form-label">Password</label>
+            <input type="password" id="password" name="password" placeholder="Enter password" class="form-control" required>
+        </div>
+        <button type="submit" class="btn btn-rainbow w-100">Login</button>
+    </form>
+</div>
+
+<!-- Bootstrap 5 JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

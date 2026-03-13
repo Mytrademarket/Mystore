@@ -1,0 +1,99 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container py-5">
+    <div class="row">
+
+        <!-- LEFT SIDE: Billing Details + Pesapal Pay -->
+        <div class="col-lg-7">
+            <div class="card shadow-sm">
+                <div class="card-body p-4">
+
+                    <h4 class="mb-4">Billing Details</h4>
+
+                    <form method="POST" action="{{ url_for('payments.pesapal_pay') }}">
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Full Name</label>
+                                <input type="text" name="name" class="form-control" value="{{ session.get('customer_name', '') }}" required>
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Phone Number</label>
+                                <input type="text" name="phone" class="form-control" required>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Email Address</label>
+                            <input type="email" name="email" class="form-control">
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Delivery Address</label>
+                            <textarea name="address" class="form-control" rows="4" required></textarea>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">City</label>
+                            <input type="text" name="city" class="form-control" required>
+                        </div>
+
+                        <!-- Pesapal -->
+                        <button type="submit" class="btn btn-success w-100 py-2">
+                            Pay with Pesapal
+                        </button>
+
+                        <br><br>
+
+                        <!-- PayPal -->
+                        <a href="{{ url_for('paypal.paypal_pay') }}" class="btn btn-warning w-100">
+                            Pay with PayPal
+                        </a>
+
+                    </form>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- RIGHT SIDE: Order Summary -->
+        <div class="col-lg-5 mt-4 mt-lg-0">
+            <div class="card shadow-sm">
+                <div class="card-body p-4">
+
+                    <h4 class="mb-4">Order Summary</h4>
+
+                    {% if cart %}
+                        <ul class="list-group mb-3">
+                            {% for item in cart.values() %}
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                <div>
+                                    <h6 class="my-0">{{ item.name }}</h6>
+                                    <small class="text-muted">Qty: {{ item.quantity }}</small>
+                                </div>
+                                <span class="text-muted">${{ item.price * item.quantity }}</span>
+                            </li>
+                            {% endfor %}
+                        </ul>
+
+                        <hr>
+
+                        <div class="d-flex justify-content-between">
+                            <strong>Total</strong>
+                            <strong>${{ total }}</strong>
+                        </div>
+
+                    {% else %}
+                        <p class="text-muted">Your cart is empty.</p>
+                    {% endif %}
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}

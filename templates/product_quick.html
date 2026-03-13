@@ -1,0 +1,57 @@
+<div class="row">
+
+<div class="col-md-6">
+
+<div id="productSlider" class="carousel slide">
+
+<div class="carousel-inner">
+
+{% if images %}
+
+{% for img in images %}
+<div class="carousel-item {% if loop.first %}active{% endif %}">
+<img src="/static/uploads/{{ img.image }}" class="d-block w-100 rounded">
+</div>
+{% endfor %}
+
+{% else %}
+
+<div class="carousel-item active">
+<img src="/static/uploads/{{ product.image }}" class="d-block w-100 rounded">
+</div>
+
+{% endif %}
+
+</div>
+
+<button class="carousel-control-prev" type="button" data-bs-target="#productSlider" data-bs-slide="prev">
+<span class="carousel-control-prev-icon"></span>
+</button>
+
+<button class="carousel-control-next" type="button" data-bs-target="#productSlider" data-bs-slide="next">
+<span class="carousel-control-next-icon"></span>
+</button>
+
+</div>
+
+</div>
+
+<div class="col-md-6">
+
+<h4>{{ product.name }}</h4>
+
+<p>{{ product.description }}</p>
+
+<h5 class="text-success">${{ product.price }}</h5>
+
+<button class="btn btn-warning add-to-cart" data-id="{{ product.id }}">
+Add to Cart
+</button>
+
+<a href="/product/{{ product.id }}" class="btn btn-dark">
+Full Details
+</a>
+
+</div>
+
+</div>

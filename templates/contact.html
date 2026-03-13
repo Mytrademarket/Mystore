@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h2>Contact Us</h2>
+
+<p>If you have any questions feel free to contact us.</p>
+
+<ul>
+<li>Phone: {{ footer_contact_phone }}</li>
+<li>Email: {{ footer_contact_email }}</li>
+<li>Address: {{ footer_address }}</li>
+</ul>
+
+<a href="https://wa.me/{{ footer_contact_phone }}" class="btn btn-success">
+Chat on WhatsApp
+</a>
+
+{% endblock %}

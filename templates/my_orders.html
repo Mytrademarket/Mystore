@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block content %}
+<h3 class="mb-4">My Orders</h3>
+
+{% if orders %}
+  {% for entry in orders %}
+    <div class="card mb-3 shadow-sm">
+      <div class="card-header bg-warning text-dark">
+        Order #{{ entry["order"]["id"] }} - Status: {{ entry["order"]["status"] }} - Total: ${{ entry["order"]["total"] }}
+      </div>
+      <div class="card-body">
+        <p><strong>Name:</strong> {{ entry["order"]["customer_name"] }}</p>
+        <p><strong>Phone:</strong> {{ entry["order"]["phone"] }}</p>
+        <p><strong>Address:</strong> {{ entry["order"]["address"] }}</p>
+
+        <h6>Items:</h6>
+        <ul class="list-group mb-2">
+          {% for item in entry["items"] %}
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+              {{ item["product_name"] }} (x{{ item["quantity"] }})
+              <span>${{ item["price"] * item["quantity"] }}</span>
+            </li>
+          {% endfor %}
+        </ul>
+
+        <a href="/invoice/{{ entry["order"]["id"] }}" class="btn btn-sm btn-primary">View Invoice</a>
+      </div>
+    </div>
+  {% endfor %}
+{% else %}
+  <p class="text-muted">You have no orders yet.</p>
+{% endif %}
+{% endblock %}

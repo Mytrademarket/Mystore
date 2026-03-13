@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Homepage Builder</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<link rel="stylesheet" href="https://unpkg.com/grapesjs/dist/css/grapes.min.css">
+
+<style>
+
+body{
+margin:0;
+font-family:Arial;
+}
+
+#builder{
+display:flex;
+height:100vh;
+}
+
+#blocks{
+width:260px;
+background:#f4f4f4;
+padding:10px;
+overflow:auto;
+border-right:1px solid #ddd;
+}
+
+#gjs{
+flex:1;
+}
+
+#topbar{
+position:fixed;
+top:10px;
+right:20px;
+z-index:999;
+}
+
+</style>
+
+</head>
+<body>
+
+<div id="topbar">
+<form method="POST" action="/admin/save_homepage">
+<input type="hidden" name="content" id="content">
+<button type="submit" class="btn btn-success">Save Homepage</button>
+</form>
+</div>
+
+<div id="builder">
+
+<div id="blocks">
+<h4>Blocks</h4>
+</div>
+
+<div id="gjs"></div>
+
+</div>
+
+<script src="https://unpkg.com/grapesjs"></script>
+
+<script>
+
+const editor = grapesjs.init({
+
+container : '#gjs',
+
+height: '100%',
+
+fromElement: false,
+
+storageManager: false,
+
+blockManager:{
+appendTo:'#blocks',
+blocks:[
+
+{
+id:'hero',
+label:'Hero Banner',
+content:`
+<section style="background:#111;color:white;padding:100px;text-align:center">
+<h1>Welcome to Our Store</h1>
+<p>Best products at best prices</p>
+<a href="/shop" class="btn btn-warning">Shop Now</a>
+</section>
+`
+},
+
+{
+id:'products',
+label:'Dynamic Products',
+content:`
+<section class="container py-5">
+<h2 class="text-center mb-4">Featured Products</h2>
+<div class="row">
+{{PRODUCT_GRID}}
+</div>
+</section>
+`
+},
+
+{
+id:'categories',
+label:'Dynamic Categories',
+content:`
+<section class="container py-5">
+<h2 class="text-center mb-4">Shop Categories</h2>
+<div class="row">
+{{CATEGORY_GRID}}
+</div>
+</section>
+`
+},
+
+{
+id:'navbar',
+label:'Store Navbar',
+content:`
+{{NAVBAR}}
+`
+},
+
+{
+id:'footer',
+label:'Footer',
+content:`
+{{FOOTER}}
+`
+},
+
+{
+id:'cta',
+label:'Newsletter CTA',
+content:`
+<section style="background:#111;color:white;padding:60px;text-align:center">
+<h2>Join Our Newsletter</h2>
+<p>Get exclusive deals</p>
+<input placeholder="Email address" style="padding:10px">
+<button class="btn btn-warning">Subscribe</button>
+</section>
+`
+}
+
+]
+}
+
+})
+
+document.querySelector("form").addEventListener("submit",function(){
+
+document.getElementById("content").value = editor.getHtml()
+
+})
+
+</script>
+
+</body>
+</html>

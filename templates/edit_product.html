@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Edit Product</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body style="background:#f1f4f9">
+
+<div class="container mt-5">
+    <div class="card shadow">
+        <div class="card-header bg-dark text-white">
+            Edit Product
+        </div>
+        <div class="card-body">
+            <form method="POST" enctype="multipart/form-data">
+
+<div class="mb-3">
+<label>Product Name</label>
+<input type="text" name="name" value="{{ product.name }}" class="form-control">
+</div>
+
+<div class="mb-3">
+<label>Price</label>
+<input type="number" name="price" value="{{ product.price }}" class="form-control">
+</div>
+
+<div class="mb-3">
+<label>Description</label>
+<textarea name="description" class="form-control">{{ product.description }}</textarea>
+</div>
+
+<div class="mb-3">
+<label>Stock</label>
+<input type="number" name="stock" value="{{ product.stock }}" class="form-control">
+</div>
+
+<div class="mb-3">
+<label>Category</label>
+<select name="category_id" class="form-select">
+{% for category in categories %}
+<option value="{{ category.id }}" {% if category.id == product.category_id %}selected{% endif %}>
+{{ category.name }}
+</option>
+{% endfor %}
+</select>
+</div>
+
+<div class="mb-3">
+<label>Change Main Image</label>
+<input type="file" name="image" class="form-control">
+</div>
+
+<button class="btn btn-primary">Update Product</button><br>
+<a href="/products" class="btn btn-secondary">Cancel</a>
+</form>
+
+<hr>
+
+<h5>Upload Additional Images</h5>
+
+<form action="/upload_product_images/{{ product.id }}" method="POST" enctype="multipart/form-data">
+
+<input type="file" name="images" multiple class="form-control">
+
+<button class="btn btn-success mt-2">
+Upload Images
+</button><br><br>
+
+</form>
+</div>
+
+
+
+<div class="mb-3">
+<label>Product Gallery</label>
+<div class="d-flex flex-wrap">
+
+{% for img in images %}
+<div class="m-2 text-center">
+
+<img src="{{ url_for('static', filename='uploads/' ~ img.image) }}" 
+width="100" class="img-thumbnail">
+
+<br>
+
+<a href="/delete_product_image/{{ img.id }}" 
+class="btn btn-sm btn-danger mt-1">
+Delete
+</a>
+
+</div>
+{% endfor %}
+
+</div>
+</div>
+
+               <!-- <button class="btn btn-primary">Update Product</button>-->
+                
+            </form>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

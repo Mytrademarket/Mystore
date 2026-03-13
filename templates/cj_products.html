@@ -1,0 +1,31 @@
+<h2>CJ Dropshipping Products</h2>
+
+<div class="row">
+
+{% for p in products %}
+
+<div class="col-md-3">
+
+<div class="card mb-3">
+
+<img src="{{ p.productImage }}" class="card-img-top">
+
+<div class="card-body">
+
+<h6>{{ p.productName }}</h6>
+
+<p>${{ p.sellPrice }}</p>
+
+<a href="/import_cj/{{ p.pid }}" class="btn btn-dark">
+Import Product
+</a>
+
+</div>
+
+</div>
+
+</div>
+
+{% endfor %}
+
+</div>

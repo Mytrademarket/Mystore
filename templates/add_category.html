@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin - Categories</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap 5 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        body {
+            background-color: #f4f6f9;
+        }
+
+        .sidebar {
+            min-height: 100vh;
+        }
+
+        .sidebar .nav-link {
+            color: #ddd;
+        }
+
+        .sidebar .nav-link:hover {
+            background: #343a40;
+            color: white;
+        }
+
+        .sidebar .nav-link.active {
+            background: #0d6efd;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+<!-- TOP NAVBAR (MOBILE FRIENDLY) -->
+<nav class="navbar navbar-dark bg-dark d-md-none">
+    <div class="container-fluid">
+        <button class="btn btn-outline-light" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebar">
+            ☰ Menu
+        </button>
+        <span class="navbar-brand mb-0">Admin Panel</span>
+    </div>
+</nav>
+
+<div class="container-fluid">
+    <div class="row">
+
+        <!-- SIDEBAR DESKTOP -->
+        <div class="col-md-3 col-lg-2 d-none d-md-block bg-dark sidebar p-3">
+            <h5 class="text-white">Admin</h5>
+            <hr class="text-secondary">
+
+            <ul class="nav flex-column">
+                <li class="nav-item">
+                    <a class="nav-link" href="/dashboard">Dashboard</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/products">Products</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="/add_category">Categories</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/orders">Orders</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/">View Store</a>
+                </li>
+            </ul>
+        </div>
+
+        <!-- OFFCANVAS SIDEBAR (MOBILE) -->
+        <div class="offcanvas offcanvas-start bg-dark text-white" tabindex="-1" id="sidebar">
+            <div class="offcanvas-header">
+                <h5>Admin</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"></button>
+            </div>
+            <div class="offcanvas-body">
+                <ul class="nav flex-column">
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="/dashboard">Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="/products">Products</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="/add_category">Categories</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="/orders">Orders</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="/">View Store</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- MAIN CONTENT -->
+        <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 py-4">
+
+            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center mb-4">
+                <h2>Categories</h2>
+            </div>
+
+            <!-- ADD CATEGORY CARD -->
+            <div class="card shadow-sm mb-4">
+                <div class="card-body">
+                    <form method="POST" class="row g-2">
+                        <div class="col-md-8">
+                            <input type="text" name="name" class="form-control" placeholder="Category name" required>
+                        </div>
+                        <div class="col-md-4">
+                            <button class="btn btn-success w-100">Add Category</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- SEARCH -->
+            <div class="mb-3">
+                <input type="text" id="searchInput" class="form-control" placeholder="Search category...">
+            </div>
+
+            <!-- CATEGORY TABLE -->
+            <div class="card shadow-sm">
+                <div class="table-responsive">
+                    <table class="table table-striped mb-0">
+                        <thead class="table-dark">
+                            <tr>
+                                <th>ID</th>
+                                <th>Name</th>
+                                <th>Products</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for category in categories %}
+                            <tr>
+                                <td>{{ category.id }}</td>
+                                <td>{{ category.name }}</td>
+                                <td>{{ category.product_count }}</td>
+                                <td>
+                                    <a href="/delete_category/{{ category.id }}" 
+                                       class="btn btn-sm btn-danger">
+                                       Delete
+                                    </a>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </main>
+    </div>
+</div>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- SEARCH FILTER -->
+<script>
+document.getElementById("searchInput").addEventListener("keyup", function() {
+
+    let filter = this.value.toLowerCase();
+    let rows = document.querySelectorAll("tbody tr");
+
+    rows.forEach(function(row) {
+        let categoryName = row.cells[1].textContent.toLowerCase();
+        row.style.display = categoryName.includes(filter) ? "" : "none";
+    });
+
+});
+</script>
+
+</body>
+</html>
