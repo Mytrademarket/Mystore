@@ -5,7 +5,7 @@ import os
 
 cj_bp = Blueprint("cj", __name__)
 
-CJ_ACCESS_TOKEN = os.environ.get("CJ5231490@api@96d336de06474ba38e2e3446db4dd836")
+CJ_ACCESS_TOKEN = os.environ.get("CJ5231490@api@337d10cab3fb49d59ac5a23159241490")
 
 # CJ API base
 CJ_API_URL = "https://developers.cjdropshipping.com/api2.0/v1/product/list"
