@@ -17,6 +17,7 @@ from routes.logout import logout_bp
 from routes.my_orders import my_orders_bp
 from routes.paypal_payment import paypal_bp
 from routes.cj import cj_bp
+from routes.eprolo import eprolo_bp
 
 
 app = Flask(__name__)
@@ -51,6 +52,7 @@ app.register_blueprint(logout_bp)
 app.register_blueprint(my_orders_bp)
 app.register_blueprint(paypal_bp)
 app.register_blueprint(cj_bp)
+app.register_blueprint(eprolo_bp)
 
 
 app.teardown_appcontext(close_db)
