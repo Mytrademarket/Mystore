@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="container mt-4">
+
+<h3>Supplier Products</h3>
+
+<div class="row">
+
+{% for p in products %}
+
+<div class="col-md-3 mb-4">
+
+<div class="card">
+
+<img src="{{ p.thumbnail }}" class="card-img-top">
+
+<div class="card-body">
+
+<h6>{{ p.title }}</h6>
+
+<p>${{ p.price }}</p>
+
+<a href="/import_supplier_product/{{ p.id }}" 
+class="btn btn-success w-100">
+
+Import Product
+
+</a>
+
+</div>
+
+</div>
+
+</div>
+
+{% endfor %}
+
+</div>
+
+</div>
+
+{% endblock %}
