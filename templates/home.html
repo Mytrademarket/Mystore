@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% block content %}
+
+{{ homepage_content|safe }}
+
+<div class="mb-4">
+  <img src="{{ url_for('static', filename='uploads/slider1.jpg') }}" class="img-fluid w-100 rounded shadow-sm" style="max-height:400px; object-fit:cover;">
+</div>
+
+{% if homepage_content %}
+<div class="container-fluid p-0">
+    {{ homepage_content|safe }}
+</div>
+{% endif %}
+
+<div class="row g-3">
+  {% for product in products %}
+ <div class="col-6 col-md-4 col-lg-3">
+  <div class="card border-0 shadow-sm h-100 product-card">
+
+    <img src="{{ url_for('static', filename='uploads/' ~ product.image) }}"
+    class="card-img-top p-3"
+    style="height:220px; object-fit:contain; cursor:pointer"
+    onclick="openProduct({{ product.id }})">
+
+    <div class="card-body pt-0">
+      <h6 class="card-title small"
+      style="cursor:pointer"
+      onclick="openProduct({{ product.id }})">
+      {{ product.name }}
+      </h6>
+
+      <p class="fw-bold mb-2">${{ product.price }}</p>
+
+      <button class="btn btn-warning w-100 add-to-cart"
+      data-id="{{ product.id }}">
+      Add to Cart
+      </button>
+    </div>
+
+  </div>
+</div>
+  {% endfor %}
+</div>
+
+{% if whatsapp %}
+<a href="https://wa.me/{{ whatsapp }}" target="_blank"
+style="position:fixed;bottom:20px;right:20px;
+background:#25D366;color:white;
+padding:15px 18px;border-radius:50%;
+font-size:22px;text-decoration:none;">
+💬
+</a>
+{% endif %}
+
+{% endblock %}
