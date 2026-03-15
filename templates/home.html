@@ -1,0 +1,147 @@
+{% extends "base.html" %}
+{% block content %}
+
+<!-- ================= SLIDER ================= -->
+
+<div id="homeSlider" class="carousel slide mb-4" data-bs-ride="carousel">
+
+<div class="carousel-inner">
+
+{% for slide in sliders %}
+
+<div class="carousel-item {% if loop.first %}active{% endif %}">
+
+<img src="/static/uploads/{{ slide.image }}"
+class="d-block w-100"
+style="height:400px;object-fit:cover;">
+
+</div>
+
+{% endfor %}
+
+</div>
+
+<button class="carousel-control-prev" type="button" data-bs-target="#homeSlider" data-bs-slide="prev">
+<span class="carousel-control-prev-icon"></span>
+</button>
+
+<button class="carousel-control-next" type="button" data-bs-target="#homeSlider" data-bs-slide="next">
+<span class="carousel-control-next-icon"></span>
+</button>
+
+</div>
+
+<!-- ================= FEATURED ================= -->
+
+<h4 class="mb-3">⭐ Featured Products</h4>
+
+<div class="row g-3">
+
+{% for product in featured %}
+
+<div class="col-6 col-md-3">
+
+<div class="card h-100 product-card">
+
+<img src="/static/uploads/{{ product.image }}"
+class="card-img-top"
+style="height:200px;object-fit:contain">
+
+<div class="card-body">
+
+<h6 class="card-title">{{ product.name }}</h6>
+
+<p class="fw-bold text-primary">${{ product.price }}</p>
+
+<button class="btn btn-warning w-100 add-to-cart"
+data-id="{{ product.id }}">
+Add to Cart
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+{% endfor %}
+
+</div>
+
+
+<!-- ================= HOT PRODUCTS ================= -->
+
+<h4 class="mt-5 mb-3">🔥 Hot Products</h4>
+
+<div class="row g-3">
+
+{% for product in hot %}
+
+<div class="col-6 col-md-3">
+
+<div class="card h-100 product-card">
+
+<img src="/static/uploads/{{ product.image }}"
+class="card-img-top"
+style="height:200px;object-fit:contain">
+
+<div class="card-body">
+
+<h6>{{ product.name }}</h6>
+
+<p class="fw-bold text-danger">${{ product.price }}</p>
+
+<button class="btn btn-dark w-100 add-to-cart"
+data-id="{{ product.id }}">
+Add to Cart
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+{% endfor %}
+
+</div>
+
+
+<!-- ================= NEW ARRIVALS ================= -->
+
+<h4 class="mt-5 mb-3">🆕 New Arrivals</h4>
+
+<div class="row g-3">
+
+{% for product in new_arrivals %}
+
+<div class="col-6 col-md-3">
+
+<div class="card h-100 product-card">
+
+<img src="/static/uploads/{{ product.image }}"
+class="card-img-top"
+style="height:200px;object-fit:contain">
+
+<div class="card-body">
+
+<h6>{{ product.name }}</h6>
+
+<p class="fw-bold">${{ product.price }}</p>
+
+<button class="btn btn-success w-100 add-to-cart"
+data-id="{{ product.id }}">
+Add to Cart
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+{% endfor %}
+
+</div>
+
+{% endblock %}
