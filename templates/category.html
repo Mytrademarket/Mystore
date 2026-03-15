@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h3 class="mb-4">{{ category.name }}</h3>
+
+<div class="row g-3">
+
+{% for product in products %}
+
+<div class="col-6 col-md-3">
+
+<div class="card h-100">
+
+<img src="{{ url_for('static', filename='uploads/' ~ product.image) }}"
+class="card-img-top"
+style="height:200px;object-fit:contain">
+
+<div class="card-body">
+
+<h6>{{ product.name }}</h6>
+
+<p class="fw-bold">${{ product.price }}</p>
+
+<button class="btn btn-warning w-100 add-to-cart"
+data-id="{{ product.id }}">
+Add to Cart
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+{% endfor %}
+
+</div>
+
+{% endblock %}
